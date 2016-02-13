@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "96dba677123b160c946d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a7ec531c1d2a55354688"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -8047,19 +8047,21 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
+	var _App = __webpack_require__(247);
+
+	var _App2 = _interopRequireDefault(_App);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var initialState = {
+	  rando: 'carrishian',
+	  cats: [{ id: 3, src: 'http://25.media.tumblr.com/tumblr_llfmcijg3Z1qc97bxo1_400.gif', fact: 'Cats must have fat in their diet because they can\'t produce it on their own' }, { id: 6, src: 'http://24.media.tumblr.com/tumblr_mcgyk1QuXu1rppsk3o1_1280.jpg', fact: 'fat produce it on their own' }, { id: 8, src: 'http://24.media.tumblr.com/qgIb8tERiqpi9szcqwY6vCc9o1_500.jpg', fact: 'have produce it on their own' }]
+	};
 	// import {createStore} from 'redux'
 	// import {Provider} from 'react-redux'
 	// import reducer from './reducer'
 	// import {setState} from './action_creators'
-	// import App from './components/App'
-	// import {ResultsContainer} from './components/Results'
 
-	var initialState = {
-	  rando: 'carrishian',
-	  cats: [{ id: 3, src: 'http:3', fact: 'Cats must have fat in their diet because they can\'t produce it on their own' }, { id: 6, src: 'http:6', fact: 'fat produce it on their own' }, { id: 8, src: 'http:8', fact: 'have produce it on their own' }]
-	};
 
 	function rootReducer() {
 	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
@@ -8097,18 +8099,6 @@
 	  }
 	}
 
-	// React.render(<App cards={data.response} />, document.body)
-
-	var Cats = function Cats(_ref) {
-	  var cats = _ref.cats;
-
-	  console.log('cats', cats);
-	  return _react2.default.createElement(
-	    'div',
-	    null,
-	    JSON.stringify(cats)
-	  );
-	};
 	_reactDom2.default.render(
 	// <Provider store={Store}>
 	//   <App />
@@ -8121,16 +8111,14 @@
 	    'div',
 	    { className: 'cats' },
 	    'cats:',
-	    _react2.default.createElement(Cats, { cats: initialState.cats })
+	    _react2.default.createElement(_App2.default, { cats: initialState.cats })
 	  )
 	), document.getElementById('app'));
 
-	// get 25 cat images
-	// get 25 cat facts
-	// zip images and facts
-	// display each (image,fact)
-
-	// allow deletion
+	// [_] get 25 cat images
+	// [_] get 25 cat facts
+	// [_] zip images and facts
+	// [√] display each (image,fact)
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(244); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
@@ -28179,6 +28167,86 @@
 	}
 
 	module.exports = isReactElementish;
+
+/***/ },
+/* 247 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(139);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _cat = __webpack_require__(248);
+
+	var _cat2 = _interopRequireDefault(_cat);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// pros: es6 -> implicit return -> short, cons: not named, value or function?
+	// const renderCat = cat => <Cat {...cat} key={cat.id}/>
+	// ^ vs v ? todo
+	// pros: hoisted, named, definitely a function cons: long
+	function renderCat(cat) {
+	  return _react2.default.createElement(_cat2.default, _extends({}, cat, { key: cat.id }));
+	}
+
+	exports.default = function (_ref) {
+	  var cats = _ref.cats;
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    cats.map(renderCat)
+	  );
+	};
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(244); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "App.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
+
+/***/ },
+/* 248 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(139);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (_ref) {
+	  var src = _ref.src;
+	  var fact = _ref.fact;
+	  return _react2.default.createElement(
+	    'div',
+	    { className: 'cat' },
+	    _react2.default.createElement('img', { src: src, className: 'image' }),
+	    _react2.default.createElement(
+	      'p',
+	      { className: 'fact' },
+	      fact
+	    )
+	  );
+	};
+
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(244); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "cat.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ }
 /******/ ]);

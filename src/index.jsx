@@ -4,15 +4,14 @@ import ReactDOM from 'react-dom'
 // import {Provider} from 'react-redux'
 // import reducer from './reducer'
 // import {setState} from './action_creators'
-// import App from './components/App'
-// import {ResultsContainer} from './components/Results'
+import App from './components/App'
 
 const initialState = {
   rando: 'carrishian',
   cats: [
-    {id: 3, src: 'http:3', fact: `Cats must have fat in their diet because they can't produce it on their own`},
-    {id: 6, src: 'http:6', fact: `fat produce it on their own`},
-    {id: 8, src: 'http:8', fact: `have produce it on their own`},
+    {id: 3, src: 'http://25.media.tumblr.com/tumblr_llfmcijg3Z1qc97bxo1_400.gif', fact: `Cats must have fat in their diet because they can't produce it on their own`},
+    {id: 6, src: 'http://24.media.tumblr.com/tumblr_mcgyk1QuXu1rppsk3o1_1280.jpg', fact: `fat produce it on their own`},
+    {id: 8, src: 'http://24.media.tumblr.com/qgIb8tERiqpi9szcqwY6vCc9o1_500.jpg', fact: `have produce it on their own`},
   ]
 }
 
@@ -47,27 +46,19 @@ function makeRequest (url, callback) {
   }
 }
 
-// React.render(<App cards={data.response} />, document.body)
-
-const Cats = ({cats}) => {
-  console.log('cats', cats)
-  return <div>{JSON.stringify(cats)}</div>
-}
 ReactDOM.render((
   // <Provider store={Store}>
   //   <App />
   // </Provider>
   <div>heyo!
     <div className="cats">cats:
-      <Cats cats={initialState.cats}/>
+      <App cats={initialState.cats} />
     </div>
   </div>
   ), document.getElementById('app')
 )
 
-// get 25 cat images
-// get 25 cat facts
-// zip images and facts
-// display each (image,fact)
-
-// allow deletion
+// [_] get 25 cat images
+// [_] get 25 cat facts
+// [_] zip images and facts
+// [√] display each (image,fact)
