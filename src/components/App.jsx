@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import Cat from './cat'
 
-// pros: es6 -> implicit return -> short, cons: not named, value or function?
-// const renderCat = cat => <Cat {...cat} key={cat.id}/>
-// ^ vs v ? todo
-// pros: hoisted, named, definitely a function cons: long
 function renderCat (cat) {
   return <Cat {...cat} key={cat.id}/>
 }
 
-export default ({cats}) => (<div>
+const App = ({cats}) => (<div>
   {cats.map(renderCat)}
 </div>)
+
+App.propTypes = {
+  cats: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    src: PropTypes.string.isRequired,
+    fact: PropTypes.string.isRequired
+  }).isRequired).isRequired
+}
+
+export default App

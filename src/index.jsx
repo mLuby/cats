@@ -1,10 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import {createStore} from 'redux'
-// import {Provider} from 'react-redux'
-// import reducer from './reducer'
-// import {setState} from './action_creators'
+import {Provider} from 'react-redux'
+import {createStore} from 'redux'
+import reducer from './reducer'
+import {setState} from './action_creators'
 import App from './components/App'
+import httpGet from './ajax'
 
 const initialState = {
   rando: 'carrishian',
@@ -15,45 +16,40 @@ const initialState = {
   ]
 }
 
-function rootReducer (state = initialState, action) {
-  switch (action.type) {
-    case DELETE:
-      return Object.assign({}, state, {
-        cats: cats.filter(cat => cat.id !== action.cat_id)
-      })
-    default:
-      return state
-  }
-}
-
-// const Store = createStore(console.log, [{img:'xyz', fact:'hairy'}])
-function makeRequest (url, callback) {
-  var httpRequest;
-  if (window.XMLHttpRequest) {
-    httpRequest = new XMLHttpRequest();
-  }
-  httpRequest.onreadystatechange = responseHandler;
-  httpRequest.open('GET', url);
-  httpRequest.send();
-  function responseHandler () {
-    if (httpRequest.readyState === 4) {
-      if (httpRequest.status === 200) {
-        callback(JSON.parse(httpRequest.responseText));
-      } else {
-        alert('There was a problem with the request.');
-      }
-    }
-  }
-}
+const Store = createStore(reducer, initialState)
 
 ReactDOM.render((
-  // <Provider store={Store}>
-  //   <App />
-  // </Provider>
-  <div>heyo!
-    <div className="cats">cats:
-      <App cats={initialState.cats} />
-    </div>
-  </div>
+  <Provider store={Store}>
+    <App {...Store.getState()} />
+  </Provider>
   ), document.getElementById('app')
 )
+
+function xmlToUrls (xmlString) { return xmlString.match(/<url>.*<\/url>/g).map(urlTagStringToUrl) }
+function urlTagStringToUrl (urlTagString) { return urlTagString.trim().slice(5,-6) }
+function zip(xs, ys, keys){ // where keys=['fact','image']
+  return xs.map((x,index) => ({id:index, [keys[0]]:x, [keys[1]]:ys[index]}))
+}
+
+// const catFactsUrl = 'https://catfacts-api.appspot.com/api/facts?number=25'
+const catFactsUrl = 'http://localhost:3000/cat-facts'
+const catImagesUrl = 'http://thecatapi.com/api/images/get?format=xml&results_per_page=25'
+let catFacts = []
+let catImages = []
+httpGet(catFactsUrl, data => {
+  console.log('get facts done:', JSON.parse(data).facts)
+  catFacts = catFacts.concat(JSON.parse(data).facts)
+  if(catFacts.length && catImages.length){ updateCats(Store) }
+})
+httpGet(catImagesUrl, data => {
+  console.log('get images done:', xmlToUrls(data))
+  catImages = catImages.concat(xmlToUrls(data))
+  if(catFacts.length && catImages.length){ updateCats(Store) }
+})
+
+function updateCats (Store) {
+  console.log('updating Cats')
+  const newState = {cats: zip(catFacts, catImages, ['fact', 'image'])}
+  Store.dispatch(setState(newState))
+  debugger
+}

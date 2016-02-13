@@ -1,34 +1,20 @@
-import {List, Map} from 'immutable'
-
 function setState(state, newState) {
-  return state.merge(newState)
+  return Object.assign({}, state, newState)
 }
 
-// function vote(state, entry) {
-//   const currentPair = state.getIn(['vote', 'pair'])
-//   if (currentPair && currentPair.includes(entry)) {
-//     return state.set('hasVoted', entry)
-//   } else {
-//     return state
-//   }
-// }
-//
-// function resetVote(state) {
-//   const hasVoted = state.get('hasVoted')
-//   const currentPair = state.getIn(['vote', 'pair'], List())
-//   if (hasVoted && !currentPair.includes(hasVoted)) {
-//     return state.remove('hasVoted')
-//   } else {
-//     return state
-//   }
-// }
+function removeCat(state, action){
+  return Object.assign({}, state, {
+    cats: cats.filter(cat => cat.id !== action.id)
+  })
+}
 
-export default function(state = Map(), action) {
+export default (state = {}, action) => {
+  console.log('idk', state, action)
   switch (action.type) {
   case 'SET_STATE':
     return setState(state, action.state)
-  // case 'VOTE':
-  //   return vote(state, action.entry)
+  case 'DELETE_CAT':
+    return removeCat(state, action.id)
   }
   return state
 }
