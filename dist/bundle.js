@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "13dce89fa4669aab32b8"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "96dba677123b160c946d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -8056,12 +8056,59 @@
 	// import App from './components/App'
 	// import {ResultsContainer} from './components/Results'
 
-	// const rootReducer  = initialState => {
-	//   setState(initialState)
-	// }
+	var initialState = {
+	  rando: 'carrishian',
+	  cats: [{ id: 3, src: 'http:3', fact: 'Cats must have fat in their diet because they can\'t produce it on their own' }, { id: 6, src: 'http:6', fact: 'fat produce it on their own' }, { id: 8, src: 'http:8', fact: 'have produce it on their own' }]
+	};
+
+	function rootReducer() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case DELETE:
+	      return Object.assign({}, state, {
+	        cats: cats.filter(function (cat) {
+	          return cat.id !== action.cat_id;
+	        })
+	      });
+	    default:
+	      return state;
+	  }
+	}
 
 	// const Store = createStore(console.log, [{img:'xyz', fact:'hairy'}])
+	function makeRequest(url, callback) {
+	  var httpRequest;
+	  if (window.XMLHttpRequest) {
+	    httpRequest = new XMLHttpRequest();
+	  }
+	  httpRequest.onreadystatechange = responseHandler;
+	  httpRequest.open('GET', url);
+	  httpRequest.send();
+	  function responseHandler() {
+	    if (httpRequest.readyState === 4) {
+	      if (httpRequest.status === 200) {
+	        callback(JSON.parse(httpRequest.responseText));
+	      } else {
+	        alert('There was a problem with the request.');
+	      }
+	    }
+	  }
+	}
 
+	// React.render(<App cards={data.response} />, document.body)
+
+	var Cats = function Cats(_ref) {
+	  var cats = _ref.cats;
+
+	  console.log('cats', cats);
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    JSON.stringify(cats)
+	  );
+	};
 	_reactDom2.default.render(
 	// <Provider store={Store}>
 	//   <App />
@@ -8069,7 +8116,13 @@
 	_react2.default.createElement(
 	  'div',
 	  null,
-	  'heyo'
+	  'heyo!',
+	  _react2.default.createElement(
+	    'div',
+	    { className: 'cats' },
+	    'cats:',
+	    _react2.default.createElement(Cats, { cats: initialState.cats })
+	  )
 	), document.getElementById('app'));
 
 	// get 25 cat images
