@@ -1,0 +1,12 @@
+.cat {
+  background: yellow;
+}
+
+.cat .image {
+  max-height: 100px;
+  max-width: 100px;
+}
+
+.cat .fact {
+  color: green;
+}

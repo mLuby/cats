@@ -6,7 +6,7 @@ Using React/Redux:
   - One image will have one fact associated with it.
 4) Be able to remove/delete images (with attached fact) from DOM.
 
--------------------------------------------------------------------
+----------------------------------------------------------
 
 Bonus points to add:
 - Linting
@@ -23,7 +23,15 @@ Feel free to additional additional functionality such as:
 - Sorting by length of fact.
 - Adding additional pictures/quotes.
 
--------------------------------------------------------------------
+TODO:
+- [_] get 25 cat images
+- [_] get 25 cat facts
+- [_] zip images and facts
+- [√] display each (image,fact)
+- [_] delete
+- [_] tests
+
+----------------------------------------------------------
 
 Please use your github account and call the repo: ‘cats’
 

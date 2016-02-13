@@ -57,8 +57,3 @@ ReactDOM.render((
   </div>
   ), document.getElementById('app')
 )
-
-// [_] get 25 cat images
-// [_] get 25 cat facts
-// [_] zip images and facts
-// [√] display each (image,fact)
