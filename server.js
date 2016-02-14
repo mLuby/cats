@@ -1,4 +1,4 @@
-const request = require('request')
+const axios = require('axios')
 const express = require('express')
 const app = express()
 
@@ -11,14 +11,7 @@ app.use((req, res, next) => {
 
 app.get('/cat-facts', (req, res) => {
   const url = 'https://catfacts-api.appspot.com/api/facts?number=25'
-  request(url, (error, response, body) => {
-    if (error) {
-      console.error(error)
-      res.statusCode(400)
-    } else {
-      res.send(body)
-    }
-  })
+  axios.get(url).then(response => res.send(response.data))
 })
 
 app.listen(3000, () => {
