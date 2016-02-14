@@ -6,9 +6,21 @@ export function setState(state) {
 }
 
 export function removeCat(id) {
-  console.log('action_creator removeCat', id)
   return {
     type: 'REMOVE_CAT',
     id
+  }
+}
+
+export function getCatsStart() {
+  return {
+    type: 'GET_CATS_START'
+  }
+}
+
+export function getCatsSuccess(cats) {
+  return {
+    type: 'GET_CATS_SUCCESS',
+    cats
   }
 }
