@@ -1,29 +1,43 @@
-import axios from 'axios'
+import axios from "axios"
+// helpers
+function urlTagStringToUrl (urlTagString) { return urlTagString.trim().replace(/^<url>/, "").replace(/<\/url>$/, "") }
+function xmlToUrls (xmlString) { return xmlString.match(/<url>.*<\/url>/g).map(urlTagStringToUrl) }
+function zip (xs, ys, keys) { return xs.map((x, index) => ({id: index, [keys[0]]: x, [keys[1]]: ys[index]})) } // where keys=["fact","image"]
+function getCatFacts () { return axios.get("http://localhost:3000/cat-facts").then(response => response.data.facts) }
+function getCatImages () { return axios.get("http://thecatapi.com/api/images/get?format=xml&results_per_page=25").then(response => xmlToUrls(response.data)) }
+function byFactLength (cat1, cat2) { return Number(cat1.fact.length) - Number(cat2.fact.length) }
 
-export function setState(state) {
+export function setState (state) {
   return {
-    type: 'SET_STATE',
+    type: "SET_STATE",
     state
   }
 }
 
-export function removeCat(id) {
+export function removeCat (id) {
   return {
-    type: 'REMOVE_CAT',
+    type: "REMOVE_CAT",
     id
   }
 }
 
-export function fetchCatsRequest() {
+export function fetchCatsSuccess (cats) {
+  return {
+    type: "FETCH_CATS_SUCCESS",
+    cats
+  }
+}
+
+export function fetchCatsRequest () {
   return dispatch => {
-    dispatch({ type: 'FETCH_CATS_REQUEST' })
+    dispatch({type: "FETCH_CATS_REQUEST"})
     return axios
     .all([getCatFacts(), getCatImages()])
     .then(
       ([catFacts, catImages]) => (
         dispatch(
           fetchCatsSuccess(
-            zip(catFacts, catImages, ['fact', 'src'])
+            zip(catFacts, catImages, ["fact", "src"])
             .sort(byFactLength)
           )
         )
@@ -31,18 +45,3 @@ export function fetchCatsRequest() {
     )
   }
 }
-
-export function fetchCatsSuccess(cats) {
-  return {
-    type: 'FETCH_CATS_SUCCESS',
-    cats
-  }
-}
-
-// helpers
-function xmlToUrls (xmlString) { return xmlString.match(/<url>.*<\/url>/g).map(urlTagStringToUrl) }
-function urlTagStringToUrl (urlTagString) { return urlTagString.trim().slice(5,-6) }
-function zip (xs, ys, keys) { return xs.map((x,index) => ({id:index, [keys[0]]:x, [keys[1]]:ys[index]})) } // where keys=['fact','image']
-function getCatFacts () { return axios.get('http://localhost:3000/cat-facts').then(response => response.data.facts) }
-function getCatImages () { return axios.get('http://thecatapi.com/api/images/get?format=xml&results_per_page=25').then(response => xmlToUrls(response.data)) }
-function byFactLength (cat1, cat2) { return Number(cat1.fact.length) - Number(cat2.fact.length) }

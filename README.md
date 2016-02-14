@@ -9,7 +9,7 @@ Using React/Redux:
 ----------------------------------------------------------
 
 Bonus points to add:
-- [~] Linting
+- [x] Linting
 - [x] ES6
 - [ ] Tests
 
@@ -19,11 +19,11 @@ Style points:
 - [ ] SASS
 
 Feel free to additional additional functionality such as:
-- [~] Adding additional pictures/quotes.
-- [~] ˆcache to localstorage
-- [~] ˆrefactor to RxJs
-- [~] ˆallow local edits (localstorage)
 - [x] Sorting by length of fact.
+- [ ] Adding additional pictures/quotes.
+- [ ] ˆcache to localstorage
+- [ ] ˆrefactor to RxJs
+- [ ] ˆallow local edits (localstorage)
 - [ ] Rearrange images on DOM.
 ----------------------------------------------------------
 

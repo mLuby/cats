@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "39e1b4633e79a45a20b2"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "445d0d9d83b0d8065f79"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -8037,7 +8037,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-	'use strict';
+	"use strict";
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -8079,7 +8079,7 @@
 	  _reactRedux.Provider,
 	  { store: store },
 	  _react2.default.createElement(_App2.default, _extends({}, store.getState(), action_creators))
-	), document.getElementById('app'));
+	), document.getElementById("app"));
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(267); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
@@ -29484,7 +29484,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -29493,26 +29493,6 @@
 	var initialState = {
 	  cats: []
 	};
-
-	function rootReducer() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
-	  var action = arguments[1];
-
-	  switch (action.type) {
-	    case 'SET_STATE':
-	      return setState(state, action.state);
-	    case 'ADD_CAT':
-	      return addCat(state, action.cat);
-	    case 'REMOVE_CAT':
-	      return removeCat(state, action.id);
-	    case 'FETCH_CATS_REQUEST':
-	      return fetchCatsRequest(state); // todo okay to have no action?
-	    case 'FETCH_CATS_SUCCESS':
-	      return fetchCatsSuccess(state, action.cats);
-	    default:
-	      return state;
-	  }
-	}
 
 	function setState(state, mewState) {
 	  return Object.assign({}, state, mewState);
@@ -29527,13 +29507,29 @@
 	}
 
 	function fetchCatsRequest(state) {
-	  console.log('reducer fetchCatsRequest');
 	  return Object.assign({}, state);
 	}
 
 	function fetchCatsSuccess(state, cats) {
-	  console.log('reducer fetchCatsSuccess');
 	  return Object.assign({}, state, { cats: cats });
+	}
+
+	function rootReducer() {
+	  var state = arguments.length <= 0 || arguments[0] === undefined ? initialState : arguments[0];
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case "SET_STATE":
+	      return setState(state, action.state);
+	    case "REMOVE_CAT":
+	      return removeCat(state, action.id);
+	    case "FETCH_CATS_REQUEST":
+	      return fetchCatsRequest(state); // todo okay to have no action?
+	    case "FETCH_CATS_SUCCESS":
+	      return fetchCatsSuccess(state, action.cats);
+	    default:
+	      return state;
+	  }
 	}
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(267); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "reducer.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -29672,7 +29668,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -29682,8 +29678,8 @@
 
 	exports.setState = setState;
 	exports.removeCat = removeCat;
-	exports.fetchCatsRequest = fetchCatsRequest;
 	exports.fetchCatsSuccess = fetchCatsSuccess;
+	exports.fetchCatsRequest = fetchCatsRequest;
 
 	var _axios = __webpack_require__(271);
 
@@ -29693,66 +29689,66 @@
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+	// helpers
+	function urlTagStringToUrl(urlTagString) {
+	  return urlTagString.trim().replace(/^<url>/, "").replace(/<\/url>$/, "");
+	}
+	function xmlToUrls(xmlString) {
+	  return xmlString.match(/<url>.*<\/url>/g).map(urlTagStringToUrl);
+	}
+	function zip(xs, ys, keys) {
+	  return xs.map(function (x, index) {
+	    var _ref;
+
+	    return _ref = { id: index }, _defineProperty(_ref, keys[0], x), _defineProperty(_ref, keys[1], ys[index]), _ref;
+	  });
+	} // where keys=["fact","image"]
+	function getCatFacts() {
+	  return _axios2.default.get("http://localhost:3000/cat-facts").then(function (response) {
+	    return response.data.facts;
+	  });
+	}
+	function getCatImages() {
+	  return _axios2.default.get("http://thecatapi.com/api/images/get?format=xml&results_per_page=25").then(function (response) {
+	    return xmlToUrls(response.data);
+	  });
+	}
+	function byFactLength(cat1, cat2) {
+	  return Number(cat1.fact.length) - Number(cat2.fact.length);
+	}
+
 	function setState(state) {
 	  return {
-	    type: 'SET_STATE',
+	    type: "SET_STATE",
 	    state: state
 	  };
 	}
 
 	function removeCat(id) {
 	  return {
-	    type: 'REMOVE_CAT',
+	    type: "REMOVE_CAT",
 	    id: id
-	  };
-	}
-
-	function fetchCatsRequest() {
-	  return function (dispatch) {
-	    dispatch({ type: 'FETCH_CATS_REQUEST' });
-	    return _axios2.default.all([getCatFacts(), getCatImages()]).then(function (_ref) {
-	      var _ref2 = _slicedToArray(_ref, 2);
-
-	      var catFacts = _ref2[0];
-	      var catImages = _ref2[1];
-	      return dispatch(fetchCatsSuccess(zip(catFacts, catImages, ['fact', 'src']).sort(byFactLength)));
-	    });
 	  };
 	}
 
 	function fetchCatsSuccess(cats) {
 	  return {
-	    type: 'FETCH_CATS_SUCCESS',
+	    type: "FETCH_CATS_SUCCESS",
 	    cats: cats
 	  };
 	}
 
-	// helpers
-	function xmlToUrls(xmlString) {
-	  return xmlString.match(/<url>.*<\/url>/g).map(urlTagStringToUrl);
-	}
-	function urlTagStringToUrl(urlTagString) {
-	  return urlTagString.trim().slice(5, -6);
-	}
-	function zip(xs, ys, keys) {
-	  return xs.map(function (x, index) {
-	    var _ref3;
+	function fetchCatsRequest() {
+	  return function (dispatch) {
+	    dispatch({ type: "FETCH_CATS_REQUEST" });
+	    return _axios2.default.all([getCatFacts(), getCatImages()]).then(function (_ref2) {
+	      var _ref3 = _slicedToArray(_ref2, 2);
 
-	    return _ref3 = { id: index }, _defineProperty(_ref3, keys[0], x), _defineProperty(_ref3, keys[1], ys[index]), _ref3;
-	  });
-	} // where keys=['fact','image']
-	function getCatFacts() {
-	  return _axios2.default.get('http://localhost:3000/cat-facts').then(function (response) {
-	    return response.data.facts;
-	  });
-	}
-	function getCatImages() {
-	  return _axios2.default.get('http://thecatapi.com/api/images/get?format=xml&results_per_page=25').then(function (response) {
-	    return xmlToUrls(response.data);
-	  });
-	}
-	function byFactLength(cat1, cat2) {
-	  return Number(cat1.fact.length) - Number(cat2.fact.length);
+	      var catFacts = _ref3[0];
+	      var catImages = _ref3[1];
+	      return dispatch(fetchCatsSuccess(zip(catFacts, catImages, ["fact", "src"]).sort(byFactLength)));
+	    });
+	  };
 	}
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(267); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "action_creators.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -30855,7 +30851,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30885,8 +30881,8 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var App = function (_React$Component) {
-	  _inherits(App, _React$Component);
+	var App = function (_Component) {
+	  _inherits(App, _Component);
 
 	  function App() {
 	    _classCallCheck(this, App);
@@ -30895,17 +30891,17 @@
 	  }
 
 	  _createClass(App, [{
-	    key: 'componentWillMount',
+	    key: "componentWillMount",
 	    value: function componentWillMount() {
 	      var dispatch = this.props.dispatch;
 
 	      dispatch((0, _action_creators.fetchCatsRequest)());
 	    }
 	  }, {
-	    key: 'render',
+	    key: "render",
 	    value: function render() {
 	      return _react2.default.createElement(
-	        'div',
+	        "div",
 	        null,
 	        this.props.cats.map(function (cat, index) {
 	          return _react2.default.createElement(_cat2.default, _extends({}, cat, { key: index }));
@@ -30915,14 +30911,16 @@
 	  }]);
 
 	  return App;
-	}(_react2.default.Component);
+	}(_react.Component);
 
+	App.displayName = "App";
 	App.propTypes = {
 	  cats: _react.PropTypes.arrayOf(_react.PropTypes.shape({
 	    id: _react.PropTypes.number.isRequired,
 	    src: _react.PropTypes.string.isRequired,
 	    fact: _react.PropTypes.string.isRequired
-	  }).isRequired).isRequired
+	  }).isRequired).isRequired,
+	  dispatch: _react.PropTypes.func.isRequired
 	};
 
 	function mapStateToProps(state) {
@@ -30940,7 +30938,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(module) {/* REACT HOT LOADER */ if (true) { (function () { var ReactHotAPI = __webpack_require__(77), RootInstanceProvider = __webpack_require__(85), ReactMount = __webpack_require__(87), React = __webpack_require__(139); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 
-	'use strict';
+	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -30956,30 +30954,30 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var Cat = function Cat(_ref) {
+	function Cat(_ref) {
 	  var src = _ref.src;
 	  var fact = _ref.fact;
 	  var id = _ref.id;
 	  var dispatch = _ref.dispatch;
-
+	  // todo fix lint: react/jsx-no-bind
 	  return _react2.default.createElement(
-	    'div',
-	    { className: 'cat', onClick: function onClick() {
+	    "div",
+	    { className: "cat", onClick: function onClick() {
 	        return dispatch((0, _action_creators.removeCat)(id));
 	      } },
-	    _react2.default.createElement('img', { src: src, className: 'image' }),
+	    _react2.default.createElement("img", { className: "image", src: src }),
 	    _react2.default.createElement(
-	      'p',
-	      { className: 'fact' },
+	      "p",
+	      { className: "fact" },
 	      fact
 	    )
 	  );
-	};
+	}
 
 	Cat.propTypes = {
+	  fact: _react.PropTypes.string.isRequired,
 	  id: _react.PropTypes.number.isRequired,
-	  src: _react.PropTypes.string.isRequired,
-	  fact: _react.PropTypes.string.isRequired
+	  src: _react.PropTypes.string.isRequired
 	};
 
 	function mapStateToProps(state, ownProps) {
