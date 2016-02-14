@@ -1,13 +1,17 @@
 import React, { PropTypes } from 'react'
+import { connect } from 'react-redux'
 import Cat from './cat'
 
 function renderCat (cat) {
   return <Cat {...cat} key={cat.id}/>
 }
 
-const App = ({cats}) => (<div>
-  {cats.map(renderCat)}
-</div>)
+const App = ({cats}) => {
+  console.log('rendering app')
+  return (<div>
+    {cats.map(renderCat)}
+  </div>)
+}
 
 App.propTypes = {
   cats: PropTypes.arrayOf(PropTypes.shape({
@@ -17,4 +21,10 @@ App.propTypes = {
   }).isRequired).isRequired
 }
 
-export default App
+function mapStateToProps(state) {
+  return {
+    cats: state.cats,
+  };
+}
+
+export default connect(mapStateToProps)(App);

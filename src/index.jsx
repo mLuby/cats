@@ -16,11 +16,12 @@ const initialState = {
   ]
 }
 
-const Store = createStore(reducer, initialState)
+const store = createStore(reducer)
+store.dispatch(setState(initialState))
 
 ReactDOM.render((
-  <Provider store={Store}>
-    <App {...Store.getState()} />
+  <Provider store={store}>
+    <App {...store.getState()} />
   </Provider>
   ), document.getElementById('app')
 )
@@ -39,17 +40,16 @@ let catImages = []
 httpGet(catFactsUrl, data => {
   console.log('get facts done:', JSON.parse(data).facts)
   catFacts = catFacts.concat(JSON.parse(data).facts)
-  if(catFacts.length && catImages.length){ updateCats(Store) }
+  if(catFacts.length && catImages.length){ updateCats(store) }
 })
 httpGet(catImagesUrl, data => {
   console.log('get images done:', xmlToUrls(data))
   catImages = catImages.concat(xmlToUrls(data))
-  if(catFacts.length && catImages.length){ updateCats(Store) }
+  if(catFacts.length && catImages.length){ updateCats(store) }
 })
 
-function updateCats (Store) {
+function updateCats (store) {
   console.log('updating Cats')
-  const newState = {cats: zip(catFacts, catImages, ['fact', 'image'])}
-  Store.dispatch(setState(newState))
-  debugger
+  const newState = {cats: zip(catFacts, catImages, ['fact', 'src'])}
+  store.dispatch(setState(newState))
 }

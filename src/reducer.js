@@ -1,15 +1,16 @@
 function setState(state, newState) {
+  console.log('setting State')
   return Object.assign({}, state, newState)
 }
 
-function removeCat(state, action){
+function removeCat(state, id){
+  console.log('removing Cat')
   return Object.assign({}, state, {
-    cats: cats.filter(cat => cat.id !== action.id)
+    cats: cats.filter(cat => cat.id !== id)
   })
 }
 
 export default (state = {}, action) => {
-  console.log('idk', state, action)
   switch (action.type) {
   case 'SET_STATE':
     return setState(state, action.state)
