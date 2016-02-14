@@ -9,28 +9,22 @@ Using React/Redux:
 ----------------------------------------------------------
 
 Bonus points to add:
-- Linting
-- Tests
-- ES6
+- [~] Linting
+- [x] ES6
+- [ ] Tests
 
 Style points:
-- Grid Layout
-- Basic Animation
-- SASS
+- [ ] Grid Layout
+- [ ] Basic Animation
+- [ ] SASS
 
 Feel free to additional additional functionality such as:
-- Rearrange images on DOM.
-- Sorting by length of fact.
-- Adding additional pictures/quotes.
-
-TODO:
-- [_] get 25 cat images
-- [_] get 25 cat facts
-- [_] zip images and facts
-- [√] display each (image,fact)
-- [_] delete
-- [_] tests
-
+- [~] Adding additional pictures/quotes.
+- [~] ˆcache to localstorage
+- [~] ˆrefactor to RxJs
+- [~] ˆallow local edits (localstorage)
+- [x] Sorting by length of fact.
+- [ ] Rearrange images on DOM.
 ----------------------------------------------------------
 
 Please use your github account and call the repo: ‘cats’

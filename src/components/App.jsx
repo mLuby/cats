@@ -10,7 +10,7 @@ class App extends React.Component {
   }
   render() {
     return (<div>
-      {this.props.cats.map(cat => <Cat {...cat} key={cat.id}/>)}
+      {this.props.cats.map((cat, index) => <Cat {...cat} key={index}/>)}
     </div>)
   }
 }

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e4aab703dea5d1d2d459"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "39e1b4633e79a45a20b2"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -29715,7 +29715,7 @@
 
 	      var catFacts = _ref2[0];
 	      var catImages = _ref2[1];
-	      return dispatch(fetchCatsSuccess(zip(catFacts, catImages, ['fact', 'src'])));
+	      return dispatch(fetchCatsSuccess(zip(catFacts, catImages, ['fact', 'src']).sort(byFactLength)));
 	    });
 	  };
 	}
@@ -29750,6 +29750,9 @@
 	  return _axios2.default.get('http://thecatapi.com/api/images/get?format=xml&results_per_page=25').then(function (response) {
 	    return xmlToUrls(response.data);
 	  });
+	}
+	function byFactLength(cat1, cat2) {
+	  return Number(cat1.fact.length) - Number(cat2.fact.length);
 	}
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(267); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "action_creators.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -30904,8 +30907,8 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        this.props.cats.map(function (cat) {
-	          return _react2.default.createElement(_cat2.default, _extends({}, cat, { key: cat.id }));
+	        this.props.cats.map(function (cat, index) {
+	          return _react2.default.createElement(_cat2.default, _extends({}, cat, { key: index }));
 	        })
 	      );
 	    }
