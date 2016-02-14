@@ -3,35 +3,29 @@ import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {createStore} from 'redux'
 import reducer from './reducer'
-import {setState} from './action_creators'
+import * as action_creators from './action_creators'
 import App from './components/App'
 import httpGet from './ajax'
 
-const initialState = {
-  rando: 'carrishian',
-  cats: [
-    {id: 3, src: 'http://25.media.tumblr.com/tumblr_llfmcijg3Z1qc97bxo1_400.gif', fact: `Cats must have fat in their diet because they can't produce it on their own`},
-    {id: 6, src: 'http://24.media.tumblr.com/tumblr_mcgyk1QuXu1rppsk3o1_1280.jpg', fact: `fat produce it on their own`},
-    {id: 8, src: 'http://24.media.tumblr.com/qgIb8tERiqpi9szcqwY6vCc9o1_500.jpg', fact: `have produce it on their own`},
-  ]
-}
-
 const store = createStore(reducer)
-store.dispatch(setState(initialState))
+// store.dispatch(setState())
 
 ReactDOM.render((
   <Provider store={store}>
-    <App {...store.getState()} />
+    <App {...store.getState()} {...action_creators} />
   </Provider>
   ), document.getElementById('app')
 )
 
+// todo fetch cats on app.componentWillMount
+// todo switch to import 'whatwg-fetch'
+//   or import axios from 'axios'
+//   or 'superagent-promise'
 function xmlToUrls (xmlString) { return xmlString.match(/<url>.*<\/url>/g).map(urlTagStringToUrl) }
 function urlTagStringToUrl (urlTagString) { return urlTagString.trim().slice(5,-6) }
 function zip(xs, ys, keys){ // where keys=['fact','image']
   return xs.map((x,index) => ({id:index, [keys[0]]:x, [keys[1]]:ys[index]}))
 }
-
 // const catFactsUrl = 'https://catfacts-api.appspot.com/api/facts?number=25'
 const catFactsUrl = 'http://localhost:3000/cat-facts'
 const catImagesUrl = 'http://thecatapi.com/api/images/get?format=xml&results_per_page=25'
@@ -47,9 +41,8 @@ httpGet(catImagesUrl, data => {
   catImages = catImages.concat(xmlToUrls(data))
   if(catFacts.length && catImages.length){ updateCats(store) }
 })
-
 function updateCats (store) {
   console.log('updating Cats')
   const newState = {cats: zip(catFacts, catImages, ['fact', 'src'])}
-  store.dispatch(setState(newState))
+  store.dispatch(action_creators.setState(newState))
 }
