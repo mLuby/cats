@@ -1,6 +1,6 @@
 import React, {PropTypes} from "react"
 import {connect} from "react-redux"
-import {removeCat} from "./../action_creators"
+import {removeCat} from "./../actionCreators"
 
 function Cat ({src, fact, id, dispatch}) { // todo fix lint: react/jsx-no-bind
   return (<div className="cat" onClick={() => dispatch(removeCat(id))}>
@@ -15,12 +15,4 @@ Cat.propTypes = {
   src: PropTypes.string.isRequired
 }
 
-function mapStateToProps (state, ownProps) {
-  return {
-    id: ownProps.id,
-    src: ownProps.src,
-    fact: ownProps.fact
-  }
-}
-
-export default connect(mapStateToProps)(Cat)
+export default connect()(Cat)

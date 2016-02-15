@@ -1,3 +1,5 @@
+My css: whole page, but particularly credit card number: https://www.indiegogo.com/projects/most-powerful-usb-batteries-cables-in-world/payments/new?perk_id=3415878
+
 Using React/Redux:
 
 1) Get cat images from "http://thecatapi.com/api/images/get?format=xml&results_per_page=25"

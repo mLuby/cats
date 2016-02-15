@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from "react"
 import {connect} from "react-redux"
-import {fetchCatsRequest} from "./../action_creators"
+import {fetchCatsRequest} from "./../actionCreators"
 import Cat from "./cat"
 
 class App extends Component {
@@ -9,9 +9,11 @@ class App extends Component {
     dispatch(fetchCatsRequest())
   }
   render () {
-    return (<div>
-      {this.props.cats.map((cat, index) => <Cat {...cat} key={index}/>)}
-    </div>)
+    return (
+      <div>
+        {this.props.cats.map((cat, index) => <Cat {...cat} key={index}/>)}
+      </div>
+    )
   }
 }
 App.displayName = "App"

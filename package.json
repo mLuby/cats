@@ -4,8 +4,7 @@
   "description": "Using React/Redux:",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --watch & webpack-dev-server --watch",
-    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js 'test/**/*.@(js|jsx)'"
+    "start": "open http://0.0.0.0:8080/dist & node server.js & webpack --watch & webpack-dev-server --watch"
   },
   "repository": {
     "type": "git",

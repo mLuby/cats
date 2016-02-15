@@ -4,14 +4,14 @@ import {Provider} from "react-redux"
 import {createStore, applyMiddleware} from "redux"
 import thunk from "redux-thunk"
 import rootReducer from "./reducer"
-import * as action_creators from "./action_creators"
+import * as actionCreators from "./actionCreators"
 import App from "./components/App"
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 ReactDOM.render((
   <Provider store={store}>
-    <App {...store.getState()} {...action_creators} />
+    <App {...store.getState()} {...actionCreators} />
   </Provider>
   ), document.getElementById("app")
 )

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "445d0d9d83b0d8065f79"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "93c75a31b886a26bf054"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -8061,9 +8061,9 @@
 
 	var _reducer2 = _interopRequireDefault(_reducer);
 
-	var _action_creators = __webpack_require__(270);
+	var _actionCreators = __webpack_require__(270);
 
-	var action_creators = _interopRequireWildcard(_action_creators);
+	var actionCreators = _interopRequireWildcard(_actionCreators);
 
 	var _App = __webpack_require__(288);
 
@@ -8078,7 +8078,7 @@
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
 	  { store: store },
-	  _react2.default.createElement(_App2.default, _extends({}, store.getState(), action_creators))
+	  _react2.default.createElement(_App2.default, _extends({}, store.getState(), actionCreators))
 	), document.getElementById("app"));
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(267); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "index.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
@@ -29685,36 +29685,59 @@
 
 	var _axios2 = _interopRequireDefault(_axios);
 
+	var _redux = __webpack_require__(250);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-	// helpers
+	var catFactsUrl = "http://0.0.0.0:3000/cat-facts";
+	var catImagesUrl = "http://thecatapi.com/api/images/get?format=xml&results_per_page=25";
 	function urlTagStringToUrl(urlTagString) {
 	  return urlTagString.trim().replace(/^<url>/, "").replace(/<\/url>$/, "");
 	}
 	function xmlToUrls(xmlString) {
 	  return xmlString.match(/<url>.*<\/url>/g).map(urlTagStringToUrl);
 	}
-	function zip(xs, ys, keys) {
-	  return xs.map(function (x, index) {
-	    var _ref;
-
-	    return _ref = { id: index }, _defineProperty(_ref, keys[0], x), _defineProperty(_ref, keys[1], ys[index]), _ref;
-	  });
-	} // where keys=["fact","image"]
 	function getCatFacts() {
-	  return _axios2.default.get("http://localhost:3000/cat-facts").then(function (response) {
+	  return _axios2.default.get(catFactsUrl).then(function (response) {
 	    return response.data.facts;
 	  });
 	}
 	function getCatImages() {
-	  return _axios2.default.get("http://thecatapi.com/api/images/get?format=xml&results_per_page=25").then(function (response) {
+	  return _axios2.default.get(catImagesUrl).then(function (response) {
 	    return xmlToUrls(response.data);
 	  });
 	}
 	function byFactLength(cat1, cat2) {
-	  return Number(cat1.fact.length) - Number(cat2.fact.length);
+	  return cat1.fact.length - cat2.fact.length;
+	}
+	function sortByFactLength(list) {
+	  return list.slice().sort(byFactLength);
+	}
+	function selectShortest(shortest, list) {
+	  return shortest.length < list.length ? shortest : list;
+	}
+	function zipAll(keys) {
+	  for (var _len = arguments.length, lists = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+	    lists[_key - 1] = arguments[_key];
+	  }
+
+	  return lists.reduce(selectShortest).map(function (_, index) {
+	    return Object.assign.apply(0, lists.map(function (list, listIndex) {
+	      return _defineProperty({}, keys[listIndex], list[index]);
+	    }));
+	  });
+	}
+	function numList(n) {
+	  return Object.keys(Array.apply(0, Array(n))).map(Number);
+	}
+	function zipCatFactsAndImages(_ref2) {
+	  var _ref3 = _slicedToArray(_ref2, 2);
+
+	  var catFacts = _ref3[0];
+	  var catImages = _ref3[1];
+	  return zipAll(["fact", "src", "id"], catFacts, catImages, numList(catFacts.length));
 	}
 
 	function setState(state) {
@@ -29741,17 +29764,11 @@
 	function fetchCatsRequest() {
 	  return function (dispatch) {
 	    dispatch({ type: "FETCH_CATS_REQUEST" });
-	    return _axios2.default.all([getCatFacts(), getCatImages()]).then(function (_ref2) {
-	      var _ref3 = _slicedToArray(_ref2, 2);
-
-	      var catFacts = _ref3[0];
-	      var catImages = _ref3[1];
-	      return dispatch(fetchCatsSuccess(zip(catFacts, catImages, ["fact", "src"]).sort(byFactLength)));
-	    });
+	    return _axios2.default.all([getCatFacts(), getCatImages()]).then((0, _redux.compose)(dispatch, fetchCatsSuccess, sortByFactLength, zipCatFactsAndImages));
 	  };
 	}
 
-	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(267); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "action_creators.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(267); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "actionCreators.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
 
 /***/ },
@@ -30867,7 +30884,7 @@
 
 	var _reactRedux = __webpack_require__(244);
 
-	var _action_creators = __webpack_require__(270);
+	var _actionCreators = __webpack_require__(270);
 
 	var _cat = __webpack_require__(289);
 
@@ -30895,7 +30912,7 @@
 	    value: function componentWillMount() {
 	      var dispatch = this.props.dispatch;
 
-	      dispatch((0, _action_creators.fetchCatsRequest)());
+	      dispatch((0, _actionCreators.fetchCatsRequest)());
 	    }
 	  }, {
 	    key: "render",
@@ -30950,7 +30967,7 @@
 
 	var _reactRedux = __webpack_require__(244);
 
-	var _action_creators = __webpack_require__(270);
+	var _actionCreators = __webpack_require__(270);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30963,7 +30980,7 @@
 	  return _react2.default.createElement(
 	    "div",
 	    { className: "cat", onClick: function onClick() {
-	        return dispatch((0, _action_creators.removeCat)(id));
+	        return dispatch((0, _actionCreators.removeCat)(id));
 	      } },
 	    _react2.default.createElement("img", { className: "image", src: src }),
 	    _react2.default.createElement(
@@ -30980,15 +30997,7 @@
 	  src: _react.PropTypes.string.isRequired
 	};
 
-	function mapStateToProps(state, ownProps) {
-	  return {
-	    id: ownProps.id,
-	    src: ownProps.src,
-	    fact: ownProps.fact
-	  };
-	}
-
-	exports.default = (0, _reactRedux.connect)(mapStateToProps)(Cat);
+	exports.default = (0, _reactRedux.connect)()(Cat);
 
 	/* REACT HOT LOADER */ }).call(this); } finally { if (true) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = __webpack_require__(267); if (makeExportsHot(module, __webpack_require__(139))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot not apply hot update to " + "cat.jsx" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)(module)))
