@@ -1,12 +1,51 @@
-.cat {
-  background: yellow;
+body {
+  min-height: 1000px;
+  text-align: center;
 }
 
-.cat .image {
-  max-height: 100px;
-  max-width: 100px;
+.container {
+	-webkit-column-width: 320px;
+  -moz-column-width: 320px;
+  -ms-column-width: 320px;
+  column-width: 320px;
+  -webkit-column-gap: 15px;
+  -moz-column-gap: 15px;
+  -ms-column-gap: 15px;
+  column-gap: 15px;
+	width: 90%;
+	margin: 50px auto;
 }
 
-.cat .fact {
-  color: green;
+div.container .cat {
+	background: #fefefe;
+	border: 2px solid #fcfcfc;
+	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+	margin: 0 2px 15px;
+	padding: 15px;
+	padding-bottom: 10px;
+	transition: opacity .4s ease-in-out;
+  display: inline-block;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  column-break-inside: avoid;
+  width: 300px;
 }
+
+div.container .cat .image {
+	width: 100%; height: auto;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 15px;
+	margin-bottom: 5px;
+}
+
+div.container .cat .fact {
+  font-size: .9rem;
+	color: #444;
+  line-height: 1.5;
+}
+
+div.container:hover .cat:not(:hover) {
+	opacity: 0.4;
+}
+
+/* referenced https://codepen.io/dudleystorey/pen/yqrhw */

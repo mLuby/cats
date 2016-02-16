@@ -1,22 +1,23 @@
 {
-  "name": "cats-test",
-  "version": "1.0.0",
-  "description": "Using React/Redux:",
-  "main": "index.js",
+  "name": "cats",
+  "version": "0.1.0",
+  "description": "cat facts and pictures",
+  "main": "dist/index.html",
   "scripts": {
-    "start": "open http://0.0.0.0:8080/dist & node server.js & webpack --watch & webpack-dev-server --watch"
+    "start": "open http://0.0.0.0:8080/dist & node server.js & webpack --watch & webpack-dev-server --watch",
+    "clean": "rm -rf dist/*.hot-update.js*"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mLuby/cats-test.git"
+    "url": "https://github.com/mLuby/cats.git"
   },
   "keywords": [],
   "author": "Mike Luby <Michael@mLuby.com> (https://github.com/mLuby)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mLuby/cats-test/issues"
+    "url": "https://github.com/mLuby/cats/issues"
   },
-  "homepage": "https://github.com/mLuby/cats-test",
+  "homepage": "https://github.com/mLuby/cats",
   "dependencies": {
     "axios": "^0.9.1",
     "express": "^4.13.4",
