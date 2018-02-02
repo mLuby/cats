@@ -4,7 +4,8 @@
   "description": "cat facts and pictures",
   "main": "dist/index.html",
   "scripts": {
-    "start": "open http://localhost:8080/dist & node server.js & webpack --watch & webpack-dev-server --watch",
+    "start": "open http://localhost:8080/dist & webpack --watch & webpack-dev-server --watch",
+    "lint": "node_modules/.bin/eslint src/",
     "clean": "rm -rf dist/*.hot-update.js*"
   },
   "repository": {

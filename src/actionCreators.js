@@ -1,11 +1,11 @@
 import axios from "axios"
 import {compose} from "redux"
 
-const catFactsUrl = "http://localhost:3000/cat-facts"
-const catImagesUrl = "http://mapd-cats.azurewebsites.net/catpics"
+const catFactsUrl = "http://cors-proxy.htmldriven.com/?url=https://catfact.ninja/facts?limit=25"
+const catImagesUrl = "http://thecatapi.com/api/images/get?format=xml&results_per_page=25"
 function urlTagStringToUrl (urlTagString) { return urlTagString.trim().replace(/^<url>/, "").replace(/<\/url>$/, "") }
 function xmlToUrls (xmlString) { return xmlString.match(/<url>.*<\/url>/g).map(urlTagStringToUrl) }
-function getCatFacts () { return axios.get(catFactsUrl).then(response => response.data.map(d => d.fact)) }
+function getCatFacts () { return axios.get(catFactsUrl).then(response => JSON.parse(response.data.body).data.map(d => d.fact)) }
 function getCatImages () { return axios.get(catImagesUrl).then(response => xmlToUrls(response.data)) }
 function byFactLength (cat1, cat2) { return cat1.fact.length - cat2.fact.length }
 function sortByFactLength (list) { return list.slice().sort(byFactLength) }

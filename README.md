@@ -1,32 +1,15 @@
-# Cats
+# Cats Challenge
+
+### Instructions
+Using Angular, React, or Vue:
+- Get cat images from http://thecatapi.com/api/images/get?format=xml&results_per_page=25.
+- Get cat facts from http://cors-proxy.htmldriven.com/?url=https://catfact.ninja/facts?limit=25.
+- Append the results to DOM for the user to view, associating each image with one fact.
+- Give the user a way to remove an image (with attached fact) from the DOM.
+
+### What we're looking for
+- functional: `git clone <your solution>` `npm install` `npm start` should let us see cats.
+- readability: we'll be reviewing your code as we would a PR, so make it understandable.
+- extensibility: we may ask you to add various features, so make it easy to do so.
+
 ![](cats.gif)
-
-# Instructions
-Clone down the repo and within it run `npm install && npm start`.
-
-This will
-1. start an express server to get around a CORS issue for one of the APIs,
-2. start the webpack dev server which does hot-reloading, and
-3. open the app in the browser where it will refresh and load.
-
-# Basics
-Using React/Redux:
-1. Get cat images from "http://thecatapi.com/api/images/get?format=xml&results_per_page=25"
-2. Get cat facts from "http://catfacts-api.appspot.com/api/facts?number=25"
-3. Append the results to DOM.
-  - One image will have one fact associated with it.
-4. Be able to remove/delete images (with attached fact) from DOM.
-
-# Bonus
-- [x] Linting
-- [x] ES6
-- [ ] Tests
-- [x] Grid Layout (sorta)
-- [x] Basic Animation
-- [ ] SASS
-- [x] Sorting by length of fact.
-- [ ] Adding additional pictures/quotes.
-- [ ] Rearrange images on DOM.
-- [ ] ˆcache to localstorage
-- [ ] ˆrefactor to RxJs
-- [ ] ˆallow local edits (localstorage)
